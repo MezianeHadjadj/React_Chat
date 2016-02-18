@@ -1,3 +1,36 @@
+var ChatBox = React.createClass({
+	getInitialState: function () {
+		return {
+			chats: null
+		};
+	},
+	componentDidMount: function () {
+		var that = this;
+		this.socket = io();
+		this.socket.on('chats', function (chats) {
+			that.setState({ chats: chats });
+		});
+		this.socket.emit('fetchChats');
+	},
+	submitChat: function (chat, callback) {
+		this.socket.emit('newChat', chat, function (err) {
+			if (err)
+				return console.error('New chat error:', err);
+			callback();
+		});
+	},
+	render: function() {
+		return (
+			<div className="chatBox">
+				<h3>Chet:</h3>
+				<ChatList chats={this.state.chats}/>
+				<ChatForm submitChat={this.submitChat}/>
+			</div>
+		);
+	}
+});
+
+
 var ChatList = React.createClass({
 	render: function () {
 		var Chats = (<div>Loading chats...</div>);
