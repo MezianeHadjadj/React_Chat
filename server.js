@@ -25,7 +25,9 @@ io.on('connection', function (socket) {
   
   socket.on('fetchChats', function () {
 		sendChats(socket);
-		socket.on('newChat', function (chat, callback) {
+	});
+
+	socket.on('newChat', function (chat, callback) {
 		fs.readFile('chat_data.json', 'utf8', function(err, chats) {
 			chats = JSON.parse(chats);
 			chats.push(chat);
@@ -35,7 +37,4 @@ io.on('connection', function (socket) {
 			});
 		});
 	});
-	});
-
-	
 });
