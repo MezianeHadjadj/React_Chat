@@ -25,6 +25,16 @@ io.on('connection', function (socket) {
   
   socket.on('fetchChats', function () {
 		sendChats(socket);
+		socket.on('newChat', function (chat, callback) {
+		fs.readFile('chat_data.json', 'utf8', function(err, chats) {
+			chats = JSON.parse(chats);
+			chats.push(chat);
+			fs.writeFile('chat_data.json', JSON.stringify(chats, null, 4), function (err) {
+				io.emit('chats', chats);
+				callback(err);
+			});
+		});
+	});
 	});
 
 	
