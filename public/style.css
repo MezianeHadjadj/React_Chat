@@ -1,0 +1,34 @@
+body {
+	background: #000000;
+	padding: 0;
+	margin: 0;
+}
+
+#content {
+	background: white;
+	padding: 50px;
+	width: 600px;
+	margin: auto;
+}
+
+.chat {
+	border: 0px #ddd solid;
+	padding: 20px;
+}
+.chat .author {
+	font-weight: bold;
+}
+.chat .body {
+	padding-top: 5px;
+}
+
+.chatForm {
+	margin-top: 20px;
+}
+.chatForm input,
+.chatForm textarea {
+	width: 100%;
+	margin-bottom: 5px;
+	border: 1px #ddd solid;
+	padding: 5px;
+}
