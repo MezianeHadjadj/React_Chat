@@ -11,6 +11,8 @@ var ChatForm = React.createClass({
 		this.props.submitChat(chat, function (err) {
 			that.refs.author.getDOMNode().value = '';
 			that.refs.text.getDOMNode().value = '';
+			that.refs.author.getDOMNode().value = '';
+			that.refs.text.getDOMNode().value = '';
 			submitButton.innerHTML = 'Post chat';
 			submitButton.removeAttribute('disabled');
 		});
