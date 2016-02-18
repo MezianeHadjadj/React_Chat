@@ -1,3 +1,29 @@
+var ChatList = React.createClass({
+	render: function () {
+		var Chats = (<div>Loading chats...</div>);
+		if (this.props.chats) {
+			Chats = this.props.chats.map(function (chat) {
+				return (<Chat chat={chat} />);
+			});
+		}
+		return (
+			<div className="chatList">
+				{Chats}
+			</div>
+		);
+	}
+});
+var Chat = React.createClass({
+	render: function () {
+		return (
+			<div className="chat">
+				<span className="author">{this.props.chat.author}</span> :<br/>
+				<div className="body">{this.props.chat.text}</div>
+			</div>
+		);
+	}
+});
+
 var ChatForm = React.createClass({
 	handleSubmit: function (e) {
 		e.preventDefault();
@@ -9,8 +35,6 @@ var ChatForm = React.createClass({
 		submitButton.innerHTML = 'Posting chat...';
 		submitButton.setAttribute('disabled', 'disabled');
 		this.props.submitChat(chat, function (err) {
-			that.refs.author.getDOMNode().value = '';
-			that.refs.text.getDOMNode().value = '';
 			that.refs.author.getDOMNode().value = '';
 			that.refs.text.getDOMNode().value = '';
 			submitButton.innerHTML = 'Post chat';
@@ -27,3 +51,9 @@ var ChatForm = React.createClass({
 		);
 	}
 });
+
+
+React.render(
+	<ChatBox/>,
+	document.getElementById('content')
+);
